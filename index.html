@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Important message from Finandy</title>
+  <meta name="description" content="Finandy’s operations have been permanently discontinued." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#08090c" />
+  <style>
+    @font-face {
+      font-family: Geist;
+      src: url("GeistVF.woff") format("woff");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #08090c;
+      --card: #111317;
+      --border: #1a1e24;
+      --accent: #00e5b5;
+      --muted: #8b949e;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .page {
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bg-glow {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 80% 0%, rgba(0, 229, 181, 0.08), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 10% 100%, rgba(0, 229, 181, 0.04), transparent 50%);
+    }
+
+    .grid-bg {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background-size: 60px 60px;
+      background-image:
+        linear-gradient(to right, rgba(0, 229, 181, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 229, 181, 0.035) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 80%);
+    }
+
+    header {
+      position: relative;
+      z-index: 2;
+      padding: 28px 32px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    header img {
+      height: 120px;
+      width: 120px;
+      object-fit: contain;
+      display: block;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 64px;
+    }
+
+    .card {
+      width: min(880px, 100%);
+      background: rgba(17, 19, 23, 0.86);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 48px 40px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(16px);
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .lang-switch button {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #0c0e12;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .lang-switch button.is-active {
+      color: #08090c;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .panel[hidden] { display: none; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(0, 229, 181, 0.7);
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    .body p {
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .body p:last-child { margin-bottom: 0; }
+
+    .result {
+      margin: 28px 0;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(0, 229, 181, 0.06);
+      border: 1px solid rgba(0, 229, 181, 0.18);
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .recommend {
+      margin-top: 8px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: #0c0e12;
+      border: 1px solid var(--border);
+      color: #d0d4d8;
+      font-size: 16px;
+    }
+
+    .timeline {
+      margin: 28px 0 0;
+    }
+
+    .timeline h2 {
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .timeline table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .timeline th,
+    .timeline td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline th {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .timeline td:first-child {
+      white-space: nowrap;
+      color: var(--accent);
+      font-weight: 600;
+      width: 7.5em;
+    }
+
+    .timeline td:last-child {
+      color: #d0d4d8;
+    }
+
+    .timeline a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .timeline a:hover { text-decoration: underline; }
+
+    .timeline tr:last-child td {
+      border-bottom: none;
+    }
+
+    .support {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .support a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .support a:hover { text-decoration: underline; }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      padding: 0 32px 28px;
+      color: #5c6570;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 16px 20px 0; }
+      .card { padding: 32px 22px 28px; border-radius: 22px; }
+      .body p { font-size: 16px; }
+      .result { font-size: 16px; }
+      .timeline th,
+      .timeline td { padding: 10px 0; }
+      .timeline td:first-child { display: block; width: auto; padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="bg-glow"></div>
+    <div class="grid-bg"></div>
+
+    <header>
+      <img src="img/logo.webp" srcset="img/logo.webp 1x, img/logo@2x.webp 2x" alt="Finandy" width="120" height="120" />
+    </header>
+
+    <main>
+      <article class="card">
+        <div class="lang-switch" role="tablist" aria-label="Language">
+          <button type="button" id="btn-en" class="is-active" data-lang="en">EN</button>
+          <button type="button" id="btn-ru" data-lang="ru">RU</button>
+          <button type="button" id="btn-es" data-lang="es">ES</button>
+        </div>
+
+        <div class="panel" id="panel-en" lang="en">
+          <div class="eyebrow">Official notice</div>
+          <h1>Important message from Finandy</h1>
+          <div class="body">
+            <p>Following an additional assessment of the state of the infrastructure, a decision has been made to discontinue Finandy’s operations and close the project.</p>
+            <p>The coverage surrounding the previously announced incident affected overall user activity, including the API business, further reducing the economic viability of continued support. The incident itself did not affect the API infrastructure or user funds on connected external exchanges.</p>
+            <p>Maintaining the API infrastructure in its current form requires significant operating costs. The service’s current revenue no longer makes it possible to provide the necessary infrastructure funding, to meet the obligations associated with its operation, or to support the team of specialists and server capacity.</p>
+          </div>
+          <p class="result">Finandy’s operations have therefore been permanently discontinued.</p>
+          <p class="recommend">We recommend disabling Finandy API keys in the settings of connected exchanges.</p>
+          <section class="timeline">
+            <h2>Timeline of Finandy’s shutdown</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>What happened</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>13.04.2026</td>
+                  <td>Support for the Finandy Exchange brokerage program and copy trading was discontinued. Users needed to close active positions on brokerage accounts. The deadline for a full withdrawal of funds was 01.07.2026. API trading continued to operate separately. <a href="https://t.me/finandyNewsEN/1002" target="_blank" rel="noopener noreferrer">News link</a></td>
+                </tr>
+                <tr>
+                  <td>01.07.2026</td>
+                  <td>The main withdrawal period ended and Finandy’s brokerage infrastructure was shut down. Remaining user withdrawals were processed through a separately deployed Finandy transit wallet.</td>
+                </tr>
+                <tr>
+                  <td>10.08.2026</td>
+                  <td>Finandy reported a security incident involving the compromise of one of the wallets used to process remaining withdrawals. Withdrawals were suspended. API trading and user funds on connected external exchanges were not affected.</td>
+                </tr>
+                <tr>
+                  <td>10.09.2026</td>
+                  <td>After a further assessment of the project, a decision was made to discontinue Finandy’s operations entirely. Maintaining the API infrastructure was no longer economically viable due to significant operating costs and a decline in user activity.</td>
+                </tr>
+                <tr>
+                  <td>10.09.2026</td>
+                  <td>Finandy permanently ceased operations. Withdrawals through Finandy are no longer available. Users are advised to delete Finandy API keys in the settings of connected exchanges.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <p class="support">Support: <a href="mailto:mail@finandy.com">mail@finandy.com</a></p>
+        </div>
+
+        <div class="panel" id="panel-ru" lang="ru" hidden>
+          <div class="eyebrow">Официальное уведомление</div>
+          <h1>Важное сообщение от Finandy</h1>
+          <div class="body">
+            <p>После дополнительной оценки состояния инфраструктуры принято решение о прекращении работы Finandy и закрытии проекта.</p>
+            <p>Информационный фон вокруг ранее объявленного инцидента повлиял на общую пользовательскую активность, включая API-направление, что дополнительно снизило экономическую эффективность его дальнейшей поддержки. При этом сам инцидент не затронул API-контур и средства пользователей на подключённых внешних биржах.</p>
+            <p>Поддержание API-контура в текущем формате требует значительных операционных затрат. Текущий уровень доходов сервиса более не позволяет обеспечивать необходимое финансирование инфраструктуры, выполнять связанные с её работой обязательства, а также поддерживать команду специалистов и серверные мощности.</p>
+          </div>
+          <p class="result">В связи с этим работа Finandy окончательно прекращена.</p>
+          <p class="recommend">Рекомендуем отключить API-ключи Finandy в настройках подключённых бирж.</p>
+          <section class="timeline">
+            <h2>Хронология завершения работы Finandy</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Дата</th>
+                  <th>Что произошло</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>13.04.2026</td>
+                  <td>Прекращена поддержка брокерской программы Finandy Exchange и копитрейдинга. Пользователям было необходимо закрыть активные позиции на брокерских счетах. Срок для полного вывода средств был установлен до 01.07.2026. API-торговля продолжала работать отдельно. <a href="https://t.me/finandyNewsRU/1232" target="_blank" rel="noopener noreferrer">Ссылка на новость</a></td>
+                </tr>
+                <tr>
+                  <td>01.07.2026</td>
+                  <td>Завершён основной период вывода средств и прекращена работа брокерской инфраструктуры Finandy. Для обработки оставшихся пользовательских выводов использовался отдельно развёрнутый транзитный кошелёк Finandy.</td>
+                </tr>
+                <tr>
+                  <td>10.08.2026</td>
+                  <td>Finandy сообщил об инциденте безопасности, связанном с компрометацией одного из кошельков, использовавшегося для обработки остаточных выводов. Выводы были приостановлены. API-торговля и средства пользователей на подключённых внешних биржах инцидентом затронуты не были.</td>
+                </tr>
+                <tr>
+                  <td>10.09.2026</td>
+                  <td>После дополнительной оценки состояния проекта принято решение о полном прекращении работы Finandy. Поддержание API-инфраструктуры стало экономически невозможным из-за значительных операционных затрат и снижения пользовательской активности.</td>
+                </tr>
+                <tr>
+                  <td>10.09.2026</td>
+                  <td>Finandy окончательно прекратил свою работу. Вывод средств через Finandy более недоступен. Пользователям рекомендуется удалить API-ключи Finandy в настройках подключённых бирж.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <p class="support">Поддержка: <a href="mailto:mail@finandy.com">mail@finandy.com</a></p>
+        </div>
+
+        <div class="panel" id="panel-es" lang="es" hidden>
+          <div class="eyebrow">Aviso oficial</div>
+          <h1>Mensaje importante de Finandy</h1>
+          <div class="body">
+            <p>Tras una evaluación adicional del estado de la infraestructura, se ha tomado la decisión de cesar las operaciones de Finandy y cerrar el proyecto.</p>
+            <p>El contexto informativo en torno al incidente anunciado anteriormente afectó a la actividad general de los usuarios, incluida la línea de API, lo que redujo aún más la viabilidad económica de su soporte continuado. El incidente en sí no afectó a la infraestructura de API ni a los fondos de los usuarios en los exchanges externos conectados.</p>
+            <p>El mantenimiento de la infraestructura de API en su formato actual requiere costes operativos significativos. El nivel actual de ingresos del servicio ya no permite financiar la infraestructura de forma adecuada, cumplir las obligaciones asociadas a su funcionamiento ni mantener el equipo de especialistas y la capacidad de servidores.</p>
+          </div>
+          <p class="result">Por ello, las operaciones de Finandy han cesado de forma definitiva.</p>
+          <p class="recommend">Recomendamos desactivar las claves API de Finandy en la configuración de los exchanges conectados.</p>
+          <section class="timeline">
+            <h2>Cronología del cese de operaciones de Finandy</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Qué ocurrió</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>13.04.2026</td>
+                  <td>Se interrumpió el soporte del programa de brokerage Finandy Exchange y del copy trading. Los usuarios debían cerrar las posiciones activas en las cuentas de brokerage. El plazo para el retiro completo de fondos se fijó hasta el 01.07.2026. El trading por API siguió funcionando por separado. <a href="https://t.me/finandyNewsES/563" target="_blank" rel="noopener noreferrer">Enlace a la noticia</a></td>
+                </tr>
+                <tr>
+                  <td>01.07.2026</td>
+                  <td>Finalizó el periodo principal de retiros y se detuvo la infraestructura de brokerage de Finandy. Los retiros pendientes se procesaron a través de un monedero de tránsito de Finandy desplegado por separado.</td>
+                </tr>
+                <tr>
+                  <td>10.08.2026</td>
+                  <td>Finandy informó de un incidente de seguridad relacionado con el compromiso de uno de los monederos utilizados para procesar los retiros restantes. Los retiros se suspendieron. El trading por API y los fondos de los usuarios en exchanges externos conectados no se vieron afectados.</td>
+                </tr>
+                <tr>
+                  <td>10.09.2026</td>
+                  <td>Tras una evaluación adicional del estado del proyecto, se decidió cesar por completo las operaciones de Finandy. El mantenimiento de la infraestructura de API dejó de ser económicamente viable debido a los significativos costes operativos y a la menor actividad de los usuarios.</td>
+                </tr>
+                <tr>
+                  <td>10.09.2026</td>
+                  <td>Finandy cesó definitivamente sus operaciones. El retiro de fondos a través de Finandy ya no está disponible. Se recomienda a los usuarios eliminar las claves API de Finandy en la configuración de los exchanges conectados.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <p class="support">Soporte: <a href="mailto:mail@finandy.com">mail@finandy.com</a></p>
+        </div>
+      </article>
+    </main>
+
+    <footer>Copyright © 2017–2026 Finandy</footer>
+  </div>
+  <script>
+    (function () {
+      var buttons = document.querySelectorAll(".lang-switch button");
+      var panels = {
+        en: document.getElementById("panel-en"),
+        ru: document.getElementById("panel-ru"),
+        es: document.getElementById("panel-es")
+      };
+      var titles = {
+        en: "Important message from Finandy",
+        ru: "Важное сообщение от Finandy",
+        es: "Mensaje importante de Finandy"
+      };
+
+      function setLang(lang) {
+        Object.keys(panels).forEach(function (key) {
+          panels[key].hidden = key !== lang;
+        });
+        buttons.forEach(function (btn) {
+          btn.classList.toggle("is-active", btn.getAttribute("data-lang") === lang);
+        });
+        document.documentElement.lang = lang;
+        document.title = titles[lang];
+        try { localStorage.setItem("finandy-notice-lang", lang); } catch (e) {}
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setLang(btn.getAttribute("data-lang"));
+        });
+      });
+
+      var saved = null;
+      try { saved = localStorage.getItem("finandy-notice-lang"); } catch (e) {}
+      var nav = (navigator.language || "").toLowerCase();
+      if (saved === "en" || saved === "ru" || saved === "es") {
+        setLang(saved);
+      } else if (nav.indexOf("ru") === 0) {
+        setLang("ru");
+      } else if (nav.indexOf("es") === 0) {
+        setLang("es");
+      } else {
+        setLang("en");
+      }
+    })();
+  </script>
+</body>
+</html>
